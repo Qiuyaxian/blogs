@@ -1,0 +1,26 @@
+<div class="rightBox" id="loginBox">
+	<form novalidate (ngSubmit)="onSubmit(user)" [formGroup]="user">
+		<div class="title"><span>登录</span></div>
+	    <div class="line">
+	    	<span class="colDark">用户名：</span>
+	    	<input type="text" formControlName="username" />
+		    <em></em>
+	    </div>
+	    <div class="line">
+	    	<span class="colDark">密码：</span>
+	    	<input type="password" formControlName="password">
+	    	<em></em>
+	    </div>
+	    <div class="line"><span class="colDark"></span>
+	        <button type="submit">登 录</button>
+	    </div>
+	    <p class="textRight">还没注册？<span class="colMint" (click)="toggle('register')">马上注册</span></p>
+	    <div class="">
+	    	<p class="colWarning textCenter" *ngIf="user.get('username').hasError('required') && 
+             user.get('username').touched">请填写用户名</p>
+
+             <p class="colWarning textCenter" *ngIf="user.get('password').hasError('required') && 
+             user.get('password').touched">请填写密码</p>
+	    </div>
+	</form>
+</div>

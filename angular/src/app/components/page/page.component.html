@@ -1,0 +1,35 @@
+<div class="pager">
+    <ul class="clear" *ngIf="url && url !== '';else elseBlock">
+        <li class="previous">
+            <a href="">上一页</a>
+        </li>
+        <li>
+            <strong>{{ page }}</strong>
+        </li> /
+        <li>
+            <strong>{{ count }}</strong>
+        </li>
+        <li class="next">
+            <a href="">下一页</a>
+        </li>
+    </ul>
+    
+    <ng-template #elseBlock>
+        <ul class="clear">
+            <li class="previous">
+                <span class="" (click)="prevHandle()">上一页</span>
+            </li>
+            <li>
+                <strong>{{ page }}</strong>
+            </li> /
+            <li>
+                <strong>{{ count }}</strong>
+            </li>
+            <li class="next">
+                <span class="" (click)="nextHandle()">下一页</span>
+            </li>
+        </ul>
+    </ng-template>
+
+    
+</div>

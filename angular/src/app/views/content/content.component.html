@@ -1,0 +1,51 @@
+<!--The content below is only a placeholder and can be replaced.-->
+<blog-header></blog-header>
+
+<blog-nav *ngIf="navs && navs.length !== 0" [navs]="navs"></blog-nav>
+
+<main class="clear">
+    <div class="mainLeft">
+         <blog-detail *ngIf="content && content._id != ''" [content]="content"></blog-detail>
+
+		<div class="listBox message">
+		    <h3 class="textLeft"><strong>评论</strong> <span class="em">一共有 <em id="messageCount">0</em> 条评论</span></h3>
+
+		    <div *ngIf="!userInfo;else commentsbox">
+		       <p class="bgDanger" style="line-height: 30px;">你还没有登录，请先登录！</p>
+	        </div> 
+
+	        <ng-template #commentsbox>
+	           <blog-comments-submit (submitData)="submitHandle($event)"></blog-comments-submit>
+	        </ng-template>
+
+		    <div class="messageList" *ngIf="comments && comments.length !== 0;else commentlistNull">
+		       <div class="messageBox" *ngFor="let comment of comments" >
+                  <blog-comments *ngIf="comment" [item]="comment"></blog-comments>
+			   </div>
+		    </div>
+            
+            <ng-template #commentlistNull>
+	           <div class="messageList">
+			       <div class="messageBox"><p>还没有留言</p></div>
+			   </div>
+	        </ng-template>
+
+		</div>
+    </div>
+
+    <div class="mainRight">
+        <div *ngIf="!userInfo;else elseBlock" class="">
+           <blog-login (loginFun)="login($event)" *ngIf="nowState == 'login'" (toggleFun)="toggle($event)"></blog-login>
+           <blog-register *ngIf="nowState == 'register'" (toggleFun)="toggle($event)"></blog-register>
+        </div> 
+
+        <ng-template #elseBlock>
+           <blog-user (logout)="logoutHandle()"></blog-user>
+        </ng-template>
+         
+        <blog-communitys></blog-communitys> 
+    </div>
+    
+</main>
+
+<blog-footer></blog-footer>

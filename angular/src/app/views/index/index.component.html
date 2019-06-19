@@ -1,0 +1,32 @@
+<!--The content below is only a placeholder and can be replaced.-->
+<blog-header></blog-header>
+
+<blog-nav *ngIf="navs && navs.length !== 0" [navs]="navs"></blog-nav>
+
+<main class="clear">
+    <div class="mainLeft">
+
+        <blog-list-item [nowIndex]="nowIndex" [item]="item" *ngFor="let item of ListItems"></blog-list-item>
+
+        <blog-page [page]="nowPage" [count]="nowPageCount" (prev)="prevHandle()" (next)="nextHandle()"></blog-page>
+
+    </div>
+
+    <div class="mainRight">
+
+        <div *ngIf="!userInfo;else elseBlock" class="">
+           <blog-login (loginFun)="login($event)" *ngIf="nowState == 'login'" (toggleFun)="toggle($event)"></blog-login>
+           <blog-register *ngIf="nowState == 'register'" (toggleFun)="toggle($event)"></blog-register>
+        </div> 
+
+        <ng-template #elseBlock>
+           <blog-user (logout)="logoutHandle()"></blog-user>
+        </ng-template>
+         
+        <blog-communitys></blog-communitys>
+
+    </div>
+    
+</main>
+
+<blog-footer></blog-footer>
